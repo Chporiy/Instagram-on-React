@@ -10,7 +10,7 @@ export default class Posts extends Component {
     error: false
   }
 
-  // Хук когда компонент загружается
+  // Хук когда компонент создался
   componentDidMount() {
     this.updatePosts();
   }

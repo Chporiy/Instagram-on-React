@@ -37,21 +37,37 @@ export default class Users extends Component {
 
   renderUsers(arr) {
     return (
-      <div className="users__block">
-        {arr.map(item => {
-          const {name, altname, photo, id} = item;
-          if (id !== 1) {
-            return (
-              <User
-                  src = {photo}
-                  alt = {altname}
-                  name = {name}
-                  min/>
-            );
-          }
-        })}
-      </div>
-    );
+      arr.map((item, i) => {
+        const {name, altname, photo, id} = item;
+        if (i !== 0) {
+          return (
+            <User
+                src = {photo}
+                alt = {altname}
+                name = {name}
+                key = {id}
+                min/>
+          )
+        }
+      })
+    )
+  }
+
+  renderMe(arr) {
+    return (
+      arr.map((item, i) => {
+        const {name, altname, photo, id} = item;
+        if (i === 0) {
+          return (
+            <User
+                src = {photo}
+                alt = {altname}
+                name = {name}
+                key = {id}/>
+          )
+        }
+      })
+    )
   }
   
   render() {
@@ -60,13 +76,14 @@ export default class Users extends Component {
         return (<ErrorMessage/>);
       }
       const items = this.renderUsers(users);
+      const me = this.renderMe(users);
+
       return(
         <div className="right">
-          <User
-                src = "https://ksassets.timeincuk.net/wp/uploads/sites/46/2017/03/Priti-Patel-re-sized.jpg"
-                alt = "Jessy"
-                name = "jessy_john" />
-          {items}
+          {me}
+          <div className="users__block">
+            {items}  
+          </div> 
         </div>
     );
   } 
